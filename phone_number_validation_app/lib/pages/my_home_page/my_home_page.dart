@@ -44,9 +44,11 @@ class MyHomePage extends HookWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              SizedBox(height: 36),
               Image.asset('assets/images/logo_transparent.png'),
+              SizedBox(height: 36),
 
-              // Contry Code
+              // Country Code
               Text(
                 'Country Code',
               ),
@@ -85,14 +87,30 @@ class MyHomePage extends HookWidget {
               myHomePageState.lastValidationResult == null
                   ? SizedBox(height: 0)
                   : Text(
-                      'For ${myHomePageState.lastCountryCode.dialCode} ${myHomePageState.lastPhoneNumber}, it is ${myHomePageState.lastValidationResult.isValid ? 'Valid' : 'Invalid'}.'),
+                      'For ${myHomePageState.lastCountryCode.dialCode} ${myHomePageState.lastPhoneNumber}, it is',
+                    ),
+              myHomePageState.lastValidationResult == null
+                  ? SizedBox(height: 0)
+                  : Text(
+                      '${myHomePageState.lastValidationResult.isValid ? 'Valid' : 'Invalid'}',
+                      style: TextStyle(
+                        color: myHomePageState.lastValidationResult.isValid
+                            ? Colors.green
+                            : Colors.red,
+                        fontSize: 32,
+                      ),
+                    ),
               TextButton(
                 onPressed: myHomePageState.isLoading == true
                     ? null
                     : () async {
                         await _onSubmit(context);
                       },
-                child: Text("Validate"),
+                child: Text(
+                  myHomePageState.lastValidationResult == null
+                      ? "Validate"
+                      : "Validate Again",
+                ),
               )
             ],
           ),

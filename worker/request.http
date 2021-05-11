@@ -1,0 +1,15 @@
+###
+POST http://localhost:8787
+Content-Type: text/plain
+
+{
+  "phoneNumber": "+85261096623"
+}
+
+###
+POST https://pnva-api.leochoi.workers.dev
+Content-Type: application/json
+
+{
+  "phoneNumber": "+85261096623"
+}

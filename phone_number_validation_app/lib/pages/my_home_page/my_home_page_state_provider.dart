@@ -73,14 +73,13 @@ class MyHomePageStateNotifier extends StateNotifier<MyHomePageState> {
 
   Future<Tuple3<CountryCode, String, PhoneNumberValidationResult>>
       getPhoneNumberValidationResult() async {
-    final username = 'ACa2a8e36fd8f64f403c8a4026adce8845';
-    final password = '96e70b680f02df46aa407f7b539b8551';
-    final basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
-
-    final url = Uri.parse(
-        'https://lookups.twilio.com/v1/PhoneNumbers/${state.countryCode.dialCode}${state.phoneNumber.trim()}');
-    final response = await http.get(url, headers: {'Authorization': basicAuth});
+    // This is my personal endpoint which includes the secret
+    final url = Uri.parse('https://pnva-api.leochoi.workers.dev');
+    final response = await http.post(url,
+        body: jsonEncode(<String, String>{
+          "phoneNumber":
+              "${state.countryCode.dialCode}${state.phoneNumber.trim()}"
+        }));
 
     PhoneNumberValidationResult phoneNumberValidationResult;
     if (response.statusCode == 200) {
