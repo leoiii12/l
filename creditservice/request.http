@@ -1,0 +1,39 @@
+###
+POST https://my-creditservice.jp.auth0.com/oauth/token
+Content-Type: application/json
+
+{
+  "audience": "http://localhost:8081",
+  "grant_type": "client_credentials",
+  "client_id": "CtTq2iK7Xl4CcBY7M4fm32R7Qfgmi7QY",
+  "client_secret": "UBKpl46OSMrXCgoZpE88SE4dfqI2oCFmtSxia43DolRRpADE_h3leXBYtrqVfR84"
+}
+
+###
+POST http://localhost:8081/creditservice/v1/calculator
+Content-Type: application/json
+Authorization: Bearer {{JWT}}
+
+{
+  "numberOfEmployees": 1,
+  "companyType": "Others",
+  "numberOfYearsOperated": 1
+}
+
+###
+POST http://localhost:8081/creditservice/v1/calculator
+Content-Type: application/json
+
+{
+  "numberOfEmployees": 1,
+  "companyType": "Others",
+  "numberOfYearsOperated": 1
+}
+
+###
+GET http://localhost:8081/healthz
+
+###
+POST http://localhost:8081/creditservice/v1/rule/reload
+Content-Type: application/json
+Authorization: Bearer {{JWT}}
